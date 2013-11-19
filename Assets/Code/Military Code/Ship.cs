@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Ship : MonoBehaviour {
 
-	private string shipName {get;set;}
-	private int health {get;set;}
-	private int damage {get;set;}
+	private string shipName;
+	private int maxHealth;
+	private int health;
+	private int damage;
 
 	public Ship(string name) {
 		this.shipName = name;
@@ -14,6 +15,7 @@ public class Ship : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (shipName == "Fighter") {
+			maxHealth = 100;
 			health = 100;
 			damage = 10;
 		}
@@ -38,4 +40,21 @@ public class Ship : MonoBehaviour {
 	public void dealDamage(Ship target) {
 		target.takeDamage(damage);
 	}
+
+	public string getName() {
+		return name; 
+	}
+
+	public int getMaxHealth() {
+		return maxHealth;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
 }

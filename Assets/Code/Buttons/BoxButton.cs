@@ -15,5 +15,6 @@ public class BoxButton : ButtonMouseOver {
 
 	void OnMouseDown() {
 		// TODO
+		Debug.Log (name);
 	}
 }

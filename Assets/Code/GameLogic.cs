@@ -6,11 +6,12 @@ public class GameLogic : MonoBehaviour {
 	private int day = 1;
 	private Hashtable resources;
 	private int research = 0;
-	private ArrayList planets;
+	private ArrayList ownedPlanets;
+	private ArrayList discoveredPlanets;
 
 	// Use this for initialization
 	void Start () {
-		planets = new ArrayList();
+		ownedPlanets = new ArrayList();
 		resources = new Hashtable();
 		resources.Add ("Minerals", 100);
 		resources.Add ("Gas", 50);
@@ -46,6 +47,10 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	public void addPlanet(Planet p) {
-		planets.Add(p);
+		ownedPlanets.Add(p);
+	}
+
+	public void discoverPlanet(Planet p) {
+		discoveredPlanets.Add(p);
 	}
 }
