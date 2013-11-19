@@ -19,6 +19,8 @@ public class OverlayButton : ButtonMouseOver {
 	}
 
 	void OnMouseDown() {
+
+		overlayScript.createBox("Test");
 		// TODO
 		Debug.Log (name);
 	}

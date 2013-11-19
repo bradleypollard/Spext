@@ -4,6 +4,7 @@ using System.Collections;
 public class Overlay : MonoBehaviour {
 
 	public GameObject gameLogic;
+	public GameObject box;
 	private GameLogic logicScript;
 	private int screenIndex = 0;
 
@@ -31,5 +32,10 @@ public class Overlay : MonoBehaviour {
 		}
 
 		Debug.Log("Name is: " + s + " and index is: " + screenIndex);
+	}
+
+	public void createBox(string text) {
+		GameObject b = (GameObject)Instantiate(box);
+		b.transform.position = new Vector3(1,1,1);
 	}
 }
