@@ -9,6 +9,8 @@ public class Overlay : MonoBehaviour {
 	private int screenIndex = 0;
 	private ArrayList boxes;
 	private float freebox = 1.3f;
+	private const int NUMITEMS = 4;
+	private int ITEMOFFSET = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -31,39 +33,60 @@ public class Overlay : MonoBehaviour {
 		freebox = 1.3f;
 	}
 
-	public void setScreen(string s) {
-		if (s == "Military") {
+	public void setScreen(string t) {
+
+		int lower = ITEMOFFSET * NUMITEMS;
+
+		if (t == "Military") {
 			clearScreen();
 			screenIndex = 0;
 
-			boxes.Add (createFreeBox("Ship A"));
-			boxes.Add (createFreeBox("Ship B"));
-			boxes.Add (createFreeBox("Ship C"));
-			boxes.Add ((GameObject)createFreeBox("Ship D"));
-		} else if (s == "Planets") {
+			ArrayList military = logicScript.getMilitary();
+			
+			int upper = Mathf.Min(lower + NUMITEMS, military.Count);
+			
+			for (int i = lower; i < upper; i++) {
+				Ship s = (Ship)military[i];
+				boxes.Add (createFreeBox(s.getName()));
+			}
+		} else if (t == "Planets") {
 			clearScreen();
 			screenIndex = 1;
-			
-			boxes.Add (createFreeBox("Planet A"));
-			boxes.Add (createFreeBox("Planet B"));
-		} else if (s == "Research") {
+
+			ArrayList planets = logicScript.getPlanets();
+
+			int upper = Mathf.Min(lower + NUMITEMS, planets.Count);
+
+			for (int i = lower; i < upper; i++) {
+				Planet p = (Planet)planets[i];
+				boxes.Add (createFreeBox(p.getName()));
+			}
+		} else if (t == "Research") {
 			clearScreen();
 			screenIndex = 2;
 			
-			boxes.Add (createFreeBox("Research A"));
-			boxes.Add (createFreeBox("Research B"));
-			boxes.Add (createFreeBox("Research C"));
-		} else if (s == "Resources") {
+			ArrayList research = logicScript.getResearch();
+			
+			int upper = Mathf.Min(lower + NUMITEMS, research.Count);
+			
+			for (int i = lower; i < upper; i++) {
+				Research r = (Research)research[i];
+				boxes.Add (createFreeBox(r.getName()));
+			}
+		} else if (t == "Resources") {
 			clearScreen();
 			screenIndex = 3;
 			
-			boxes.Add (createFreeBox("Minerals"));
-			boxes.Add (createFreeBox("Gas"));
-			boxes.Add (createFreeBox("Power"));
-			boxes.Add (createFreeBox("Research"));
+			Hashtable resources = logicScript.getResources();
+			
+			int upper = Mathf.Min(lower + NUMITEMS, resources.Count);
+			
+			foreach (DictionaryEntry e in resources) {
+				boxes.Add (createFreeBox((string)e.Key));
+			}
 		}
 
-		Debug.Log("Name is: " + s + " and index is: " + screenIndex);
+		Debug.Log("Name is: " + t + " and index is: " + screenIndex);
 	}
 
 	private GameObject createBox(string text, Vector3 position) {
@@ -74,6 +97,7 @@ public class Overlay : MonoBehaviour {
 	}
 
 	public GameObject createFreeBox(string name) {
+		// Will need name, image, value, description
 		GameObject b = createBox(name, new Vector3(-1,freebox,1));
 		freebox -= 0.85f;
 		return b;

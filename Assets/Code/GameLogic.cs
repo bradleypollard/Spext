@@ -8,13 +8,20 @@ public class GameLogic : MonoBehaviour {
 	private int research = 0;
 	private ArrayList ownedPlanets;
 	private ArrayList discoveredPlanets;
+	private ArrayList unlockedResearch;
+	private ArrayList military;
 
 	// Use this for initialization
 	void Start () {
 		ownedPlanets = new ArrayList();
+		discoveredPlanets = new ArrayList();
+		unlockedResearch = new ArrayList();
+		military = new ArrayList();
 		resources = new Hashtable();
 		resources.Add ("Minerals", 100);
 		resources.Add ("Gas", 50);
+		resources.Add ("Power", 100);
+		resources.Add ("Research", 25);
 	}
 	
 	// Update is called once per frame
@@ -52,5 +59,21 @@ public class GameLogic : MonoBehaviour {
 
 	public void discoverPlanet(Planet p) {
 		discoveredPlanets.Add(p);
+	}
+
+	public ArrayList getPlanets() {
+		return ownedPlanets;
+	}
+
+	public Hashtable getResources() {
+		return resources;
+	}
+
+	public ArrayList getResearch() {
+		return unlockedResearch;
+	}
+
+	public ArrayList getMilitary() {
+		return military;
 	}
 }
